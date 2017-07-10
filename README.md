@@ -2,7 +2,7 @@
 a metric platform based on influxdb in java
 
 
-User Guide： 
+User Guide：   
 1.add the file metric.properties under classpath:    
 （1）if direct connect to influxdb，like this：    
   metric.serverAddr=192.168.242.141:8086   
