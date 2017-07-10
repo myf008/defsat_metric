@@ -4,7 +4,7 @@ a metric platform based on influxdb in java
 
 使用指南： 
 1.在classpath下添加metric.properties:    
-（1）若是直连influxdb，则配置如： 
+（1）若是直连influxdb，则配置如：    
   metric.serverAddr=192.168.242.141:8086   
   metric.storagePolicy=influxdb   
   metric.dbname=stg   
