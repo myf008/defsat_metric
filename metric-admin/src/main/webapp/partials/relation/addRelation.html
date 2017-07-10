@@ -1,0 +1,51 @@
+<div class="modal-header">
+	<h3 class="modal-title">{{data.title}}</h3>
+</div>
+<div class="col-xs-12">
+    	<alert ng-show="data.isShow" type="data.type" close="closeAlert()">{{data.msg}}</alert>
+</div>
+
+<div class="modal-body">
+	<form name="relationform" class="form-horizontal">
+		<div class="form-group">
+			<label for="appId" class="col-sm-3 control-label no-padding-right">业务标识</label>
+            <div class="col-sm-7">
+                <select class="form-control" name="appid" ng-model="relation.appId" ng-options="item for item in appIds" />
+             </div>
+		</div>
+		
+		<div class="form-group">            
+			<label for="influxdbId" class="col-sm-3 control-label no-padding-right">Influxdb</label>
+            <div class="col-sm-7">
+                <select class="form-control" name="influxdbId" ng-model="relation.influxdbId" ng-options="item for item in influxdbs"/>
+            </div>
+        </div>
+		<div class="form-group">
+            <label for="dbName" class="col-sm-3 control-label no-padding-right">数据库名</label>
+            <div class="col-sm-7">
+               <input type="text" name="dbName" class="form-control" ng-model="relation.dbName" placeholder="dbName" required/>
+            	<div class="error" ng-show="relationform.dbName.$dirty && relationform.dbName.$invalid">
+					<div class="error" style="color:red; ng-show="relationform.dbName.$error.required">
+						dbName不能为空
+					</div> 
+				</div>
+            </div>
+        </div>		
+		<div class="form-group">
+            <label for="retention" class="col-sm-3 control-label no-padding-right">保留策略</label>
+            <div class="col-sm-7">
+               <input type="text"  name="retention"  class="form-control" ng-model="relation.retention" placeholder="retention" required/>
+            	<div class="error" ng-show="relationform.retention.$dirty && relationform.retention.$invalid">
+					<div class="error" style="color:red; ng-show="relationform.retention.$error.required">
+						retention不能为空
+					</div> 
+				</div>
+            </div>
+        </div>		
+	</form>
+</div>
+
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="addRelation()">确定</button>
+	<button class="btn btn-warning" ng-click="cancel()">取消</button>
+</div>

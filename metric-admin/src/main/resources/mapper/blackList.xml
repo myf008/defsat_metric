@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.defsat.metric.admin.dao.daointerface.BlackListDAO">
+
+	<resultMap id="blackListMap" type="blacklistdo">
+		<id property="id" column="id" />
+		<result property="appId" column="app_id" />
+		<result property="dbName" column="db_name" />
+		<result property="measurement" column="measurement" />
+		<result property="fieldName" column="field_name" />
+		<result property="creatTime" column="create_time" />
+		<result property="modifyTime" column="modify_time" />
+	</resultMap>
+
+	<sql id="columns">
+		id,app_id,db_name,measurement,field_name,create_time,modify_time
+	</sql>
+	
+	<select id="getBlackList" parameterType="String" resultMap="blackListMap">
+		select
+		<include refid="columns" />
+		from blacklist
+		where app_id = #{appId}
+	</select>
+	
+	<select id="getAllBlackList" resultMap="blackListMap">
+		select
+		<include refid="columns" />
+		from blacklist
+	</select>
+	
+	<insert id="insert" parameterType="blacklistdo">
+		insert into blacklist
+		(app_id,db_name,measurement,field_name,create_time,modify_time)
+		values
+		( #{appId}, #{dbName}, #{measurement}, #{fieldName}, now(), now() )
+	</insert>
+
+	<delete id="delete" parameterType="String">
+		delete from
+		blacklist
+		where app_id = #{appId}
+	</delete>
+	
+	<delete id="delOne" parameterType="blacklistdo">
+		delete from
+		blacklist
+		where app_id = #{appId} and
+		db_name = #{dbName} and
+		measurement = #{measurement} and
+		field_name = #{fieldName}
+	</delete>
+
+	<update id="update" parameterType="blacklistdo">
+		update
+		blacklist
+		set
+		field_name = #{fieldName},
+		modify_time = now()
+		where app_id = #{appId} and
+		db_name = #{dbName} and
+		measurement = #{measurement}
+	</update>
+
+</mapper> 

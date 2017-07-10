@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.defsat.metric.admin.dao.daointerface.AppDAO">
+
+	<resultMap id="appMap" type="appdo">
+		<id property="id" column="id" />
+		<result property="appId" column="app_id" />
+		<result property="description" column="description" />
+		<result property="owner" column="owner" />
+		<result property="mail" column="mail" />
+		<result property="creatTime" column="create_time" />
+		<result property="modifyTime" column="modify_time" />
+	</resultMap>
+
+	<sql id="columns">
+		id,app_id,description,owner,mail,telephone,create_time,modify_time
+	</sql>
+	
+	<select id="getAppById" parameterType="String" resultMap="appMap">
+		select
+		<include refid="columns" />
+		from app
+		where app_id = #{appId}
+	</select>
+	
+	<select id="getAllApps" resultMap="appMap">
+		select
+		<include refid="columns" />
+		from app
+	</select>
+	
+	<insert id="insert" parameterType="appdo">
+		insert ignore into app
+		(app_id,description,owner,mail,telephone,create_time,modify_time)
+		values
+		( #{appId}, #{description}, #{owner}, #{mail}, #{telephone}, now(), now() )
+	</insert>
+
+	<delete id="delete" parameterType="String">
+		delete from
+		app
+		where app_id = #{appId}
+	</delete>
+
+	<update id="updateByAppId" parameterType="appdo">
+		update
+		app
+		set
+		description = #{description},
+		owner = #{owner},
+		mail = #{mail},
+		telephone = #{telephone},
+		modify_time = now()
+		where app_id = #{appId}
+	</update>
+
+</mapper> 

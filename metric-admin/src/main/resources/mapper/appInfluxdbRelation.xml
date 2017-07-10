@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.defsat.metric.admin.dao.daointerface.AppInfluxRelDAO">
+
+	<resultMap id="appInfluxdbRelationMap" type="appinfluxreldo">
+		<id property="id" column="id" />
+		<result property="appId" column="app_id" />
+		<result property="influxdbId" column="influxdb_id" />
+		<result property="dbName" column="db_name" />
+		<result property="retention" column="retention" />
+		<result property="creatTime" column="create_time" />
+		<result property="modifyTime" column="modify_time" />
+	</resultMap>
+
+	<sql id="columns">
+		id,app_id,influxdb_id,db_name,retention,create_time,modify_time
+	</sql>
+
+
+	<select id="getRelation" parameterType="String" resultMap="appInfluxdbRelationMap">
+		select
+		<include refid="columns" />
+		from app_influxdb_relation
+		where app_id = #{appId}
+	</select>
+	
+	<select id="getAllRelations" resultMap="appInfluxdbRelationMap">
+		select
+		<include refid="columns" />
+		from app_influxdb_relation
+	</select>
+	
+	<insert id="insert" parameterType="appinfluxreldo">
+		insert ignore into app_influxdb_relation
+		(app_id,influxdb_id,db_name,retention,create_time,modify_time)
+		values
+		( #{appId}, #{influxdbId}, #{dbName}, #{retention}, now(), now() )
+	</insert>
+
+	<delete id="deleteRelation" parameterType="String">
+		delete from
+		app_influxdb_relation
+		where app_id = #{appId}
+	</delete>
+	
+	<delete id="delByInfluxdbId" parameterType="String">
+		delete from
+		app_influxdb_relation
+		where influxdb_id = #{influxdbId}
+	</delete>
+
+	<update id="updateRelation" parameterType="appinfluxreldo">
+		update
+		app_influxdb_relation
+		set
+		influxdb_id = #{influxdbId},
+		db_name = #{dbName},
+		retention = #{retention},
+		modify_time = now()
+		where app_id = #{appId}
+	</update>
+
+</mapper> 

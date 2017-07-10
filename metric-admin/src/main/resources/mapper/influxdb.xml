@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.defsat.metric.admin.dao.daointerface.InfluxdbDAO">
+
+	<resultMap id="influxdbMap" type="influxdbdo">
+		<id property="id" column="id" />
+		<result property="influxdbId" column="influxdb_id" />
+		<result property="userName" column="user_name" />
+		<result property="password" column="password" />
+		<result property="creatTime" column="create_time" />
+		<result property="modifyTime" column="modify_time" />
+	</resultMap>
+
+	<sql id="columns">
+		id,influxdb_id,user_name,password,create_time,modify_time
+	</sql>
+
+
+	<select id="getInfluxdbById" parameterType="String" resultMap="influxdbMap">
+		select
+		<include refid="columns" />
+		from influxdb
+		where influxdb_id = #{influxdbId}
+	</select>
+	
+	<select id="getAllInfluxdb" resultMap="influxdbMap">
+		select
+		<include refid="columns" />
+		from influxdb
+	</select>
+	
+	<insert id="insert" parameterType="influxdbdo">
+		insert ignore into influxdb
+		(influxdb_id,user_name,password,create_time,modify_time)
+		values
+		( #{influxdbId}, #{userName}, #{password}, now(), now() )
+	</insert>
+
+	<update id="updateByInfluxdbId" parameterType="influxdbdo">
+		update
+		influxdb
+		set
+		user_name = #{userName},
+		password = #{password},
+		modify_time = now()
+		where influxdb_id = #{influxdbId}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from
+		influxdb
+		where influxdb_id = #{influxdbId}
+	</delete>
+</mapper> 

@@ -1,0 +1,43 @@
+<div class="modal-header">
+	<h3 class="modal-title">{{data.title}}</h3>
+</div>
+<div class="col-xs-12">
+    	<alert ng-show="data.isShow" type="data.type" close="closeAlert()">{{data.msg}}</alert>
+</div>
+
+<div class="modal-body">
+	<form name="influxdbform" class="form-horizontal">
+		<div class="form-group">
+			<label for="influxdbId" class="col-sm-3 control-label no-padding-right">IP地址</label>
+
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="influxdbId" placeholder="Ip:Port" ng-model="influxdb.influxdbId" required/>
+                <div class="error" ng-show="influxdbform.influxdbId.$dirty && influxdbform.influxdbId.$invalid">
+					<div class="error" style="color:red; ng-show="influxdbform.influxdbId.$error.required">
+						IP地址不能为空
+					</div> 
+				</div>
+             </div>
+		</div>
+		
+		<div class="form-group">
+            <label for="userName" class="col-sm-3 control-label no-padding-right">用户名</label>
+            
+            <div class="col-sm-7">
+               <input type="text" class="form-control" ng-model="influxdb.userName" placeholder="userName"/>
+            </div>
+        </div>		
+		<div class="form-group">
+            <label for="password" class="col-sm-3 control-label no-padding-right">密码</label>
+            
+            <div class="col-sm-7">
+               <input type="text" class="form-control" ng-model="influxdb.password" placeholder="password"/>
+            </div>
+        </div>		
+	</form>
+</div>
+
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="addInfluxdb()">确定</button>
+	<button class="btn btn-warning" ng-click="cancel()">取消</button>
+</div>
