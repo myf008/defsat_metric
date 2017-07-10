@@ -15,7 +15,7 @@ a metric platform based on influxdb in java
  (2)若通过kafka中转，则配置如：
  metric.appId=aaa
  metric.kafka.bootstrap.servers=192.168.242.136:9092
- 注：influxdb等配置在metric-admin中配置
+   注：influxdb等配置在metric-admin中配置
  
  2.调用方法：
  IMetricAgent agent = AgentFactory.getAgent();
@@ -29,4 +29,4 @@ a metric platform based on influxdb in java
  this.agent.log("stg",tags, fields);
  
  3.influxdb管理界面：influxdb server ：8083
-  数据展示：grafana server ：3000
+    数据展示：grafana server ：3000
