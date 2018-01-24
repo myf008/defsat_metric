@@ -8,9 +8,8 @@ jdk:
 #   - "echo skipped"
 #install:
 #  - "echo skipped"
-#script:
-#  - "echo skipped" 
-#  - mvn install -Dmaven.javadoc.skip=true -Dmaven.test.skip=true
+script:
+  - "echo skipped" 
 # - mvn deploy
 notifications:
   email:
