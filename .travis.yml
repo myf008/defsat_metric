@@ -10,7 +10,7 @@ install:
   - "echo skipped"
 script:
 #  - "echo skipped" 
-  - mvn install -Dmaven.javadoc.skip=true
+#  - mvn install -Dmaven.javadoc.skip=true -Dmaven.test.skip=true
 # - mvn deploy
 notifications:
   email:
