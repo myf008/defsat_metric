@@ -3,12 +3,12 @@ language: java
 jdk:
    - oraclejdk8
 #  - openjdk8
-before_install:
+#before_install:
 #  - mvn install -Dmaven.javadoc.skip=true
-   - "echo skipped"
-install:
-  - "echo skipped"
-script:
+#   - "echo skipped"
+#install:
+#  - "echo skipped"
+#script:
 #  - "echo skipped" 
 #  - mvn install -Dmaven.javadoc.skip=true -Dmaven.test.skip=true
 # - mvn deploy
